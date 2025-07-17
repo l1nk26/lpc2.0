@@ -1,5 +1,7 @@
 #include <iostream>
 #include "lpc/List.hpp"
+#include "lpc/Queue.hpp"
+#include "lpc/Stack.hpp"
 
 using namespace std;
 
@@ -12,6 +14,10 @@ int main() {
     readInput();
 
     List<int> l;
+    List<float> l2;
+    List<double> l4;
+    List<List<int> > l3;
+    List<Stack<Queue<int> > > s;
     l.insertEnd(3);
     cout << l << " ";
 

@@ -26,13 +26,8 @@ object/%.o: lpc/%.cpp
 clean:
 	rm -f ./$(OUTPUT) object/*
 
-add_generic_types:
-	bash -c 'for t in "List" "Stack" "Queue" \
-	do echo "$$t" \
-	done \
-	if  grep -q List main.cpp \
-	then echo "se cumple" \
-	fi'
+generic_types:
+	bash add_generic.txt
 
 find_error: $(OUTPUT)
 	@gdb -x find_error ./$(OUTPUT)
