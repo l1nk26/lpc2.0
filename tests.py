@@ -1,6 +1,6 @@
 import subprocess
 
-PROGRAM_NAME = "./build"
+PROGRAM_NAME = "./lpc"
 
 def test(input: str, output: str) -> bool:
     testPassed: bool = False
@@ -28,9 +28,11 @@ inputs: list[str] = [
 
 outputs: list[str] = [
 """
-hola""",
+hola
+""",
 """
-mundo"""
+mundo
+"""
 ]
 
 def main():
@@ -41,8 +43,8 @@ def main():
     i = 0
     allPassed: bool = True
     for input, output in zip(inputs, outputs):
-        input = input.strip("\n")
-        output = output.lstrip("\n")
+        input = input.lstrip("\n")
+        output = output.strip("\n")
 
         print(f"test {i} -> ", end="")
         if not test(input, output):

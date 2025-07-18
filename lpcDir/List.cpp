@@ -139,12 +139,12 @@ void List<T>::replace(const T& value, const int& position) {
 }
 
 template <typename T>
-inline bool List<T>::isEmpty()     {
+bool List<T>::isEmpty()     {
     return size == 0;
 }
 
 template <typename T>
-inline int List<T>::getSize()     {
+int List<T>::getSize()     {
     return size;
 }
 
@@ -396,6 +396,42 @@ void List<T>::removeNode(DoubleLinkNode<T>* toDelete) {
     delete toDelete;
 }
 
+template <>
+int List<int>::max() {
+
+    if (head == NULL) {
+        return 0;
+    }
+
+    int m = head->getValue();
+    DoubleLinkNode<int>* current = head->getNext();
+
+    while (current != NULL) {
+        if (current->getValue() > m) m = current->getValue();
+
+        current = current->getNext();
+    }
+    return m;
+}
+
+template <>
+int List<int>::min() {
+
+    if (head == NULL) {
+        return 0;
+    }
+
+    int m = head->getValue();
+    DoubleLinkNode<int>* current = head->getNext();
+
+    while (current != NULL) {
+        if (current->getValue() < m) m = current->getValue();
+
+        current = current->getNext();
+    }
+    return m;
+}
+
 namespace ListUtils {
   
     template <typename T>
@@ -423,7 +459,9 @@ namespace ListUtils {
         return lists;
     }
 }
-
 template class List<int>;
+template std::ostream& operator<<(std::ostream&, const List<int>& list);
 
-template std::ostream& operator<<(std::ostream&, const List<int>& l);
+template class List<std::string>;
+template std::ostream& operator<<(std::ostream&, const List<std::string>& list);
+

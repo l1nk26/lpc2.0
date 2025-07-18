@@ -1,3 +1,4 @@
+set args < input.txt
 run
 info line
 info locals

@@ -1,11 +1,11 @@
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -g -Ilpc -O0
+CFLAGS = -Wall -Wextra -std=c++11 -g -O0
 
-MY_LIBS = $(wildcard lpc/*)
-HEADERS = $(wildcard lpc/*.hpp)
-NO_HEADERS = $(wildcard lpc/*.cpp)
-OBJECTS = $(patsubst lpc/%.cpp, object/%.o, $(NO_HEADERS))
+MY_LIBS = $(wildcard lpcDir/*)
+HEADERS = lpcDir/List.hpp lpcDir/Queue.hpp lpcDir/Stack.hpp
+NO_HEADERS = lpcDir/List.cpp lpcDir/Queue.cpp lpcDir/Stack.cpp
+OBJECTS = $(patsubst lpcDir/%.cpp, object/%.o, $(NO_HEADERS))
 TARGET = main.cpp
-OUTPUT = build
+OUTPUT = lpc
 
 $(OUTPUT): $(TARGET) $(HEADERS) $(OBJECTS)
 	g++ $(CFLAGS) -o $(OUTPUT) $(TARGET) $(OBJECTS)
@@ -14,20 +14,20 @@ $(OUTPUT): $(TARGET) $(HEADERS) $(OBJECTS)
 # $(OUTPUT): $(TARGET) $(MY_LIBS) 
 # 	g++ $(CFLAGS) -o $(OUTPUT) $(TARGET)
 
-run: $(OUTPUT)
+run: generic_types $(OUTPUT)
 	./$(OUTPUT)
 
-run_txt: $(OUTPUT)
+run_txt: generic_types $(OUTPUT)
 	./$(OUTPUT) < input.txt
 
-object/%.o: lpc/%.cpp
+object/%.o: lpcDir/%.cpp
 	g++ $(CFLAGS) -o $@ -c $<
 
 clean:
 	rm -f ./$(OUTPUT) object/*
 
 generic_types:
-	bash add_generic.txt
+	python generic_types.py
 
 find_error: $(OUTPUT)
 	@gdb -x find_error ./$(OUTPUT)
@@ -42,4 +42,4 @@ ready: clean
 tests: $(OUTPUT)
 	python tests.py
 
-.PHONY: clean run find_error personalized
+.PHONY: clean run find_error personalized generic_types

@@ -31,8 +31,8 @@ class List {
 
         void replace(const T& value, const int& position);
 
-        inline bool isEmpty();
-        inline int getSize();
+        bool isEmpty();
+        int getSize();
 
         void extends(const List<T>& other);
 
@@ -58,6 +58,9 @@ class List {
         template <typename U>
         friend std::ostream& operator<<(std::ostream& os, const List<U>& list);
 
+        int max();
+
+        int min();
     private:
         DoubleLinkNode<T>* head;
         DoubleLinkNode<T>* tail;

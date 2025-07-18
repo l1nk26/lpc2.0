@@ -13,12 +13,27 @@ def getTemplateTypesOf(className: str, fileName: str = "main.cpp") -> list[str]:
     types = []
     with open(fileName, "r") as f:
         for line in f.readlines():
-            if className + "<" not in line or "<" + className in line:
+            if className + "<" not in line:
                 continue
+
             type = line[line.find("<")+1:line.rfind(">")]
             types.append(type)
             
     return types
+
+def writeTemplatesDeclarations(className: str, types: list[str]) -> None:
+
+    fileName = f"lpcDir/{className}.cpp"
+    for type in types:
+        line = f"template class {className}<{type}>;"
+        lineOverload = f"template std::ostream& operator<<(std::ostream&, const {className}<{type}>& {className.lower()});"
+        if isInFile(line, fileName):
+            continue
+
+        with open(fileName, "a") as f:
+            f.write(line + "\n")
+            f.write(lineOverload + "\n\n")
+
 
 def handAnidateTemplates(types: list[str]) -> list[str]:
     processedTemplates = []
@@ -41,15 +56,8 @@ for className in ("List", "Stack", "Queue"):
 
     types.extend(handAnidateTemplates(types))
 
+    types = list(set(types))
+
     types.sort(key=lambda x: x.count("<"))
 
-    fileName = f"lpc/{className}.cpp"
-    for type in types:
-        line = f"template class {className}<{type}>"
-        if isInFile(line, fileName):
-            continue
-
-        with open(fileName, "a") as f:
-            f.write(line)
-
-
+    writeTemplatesDeclarations(className, types)
