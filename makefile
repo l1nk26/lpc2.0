@@ -1,9 +1,10 @@
 CFLAGS = -Wall -Wextra -std=c++11 -g -O0
 
-MY_LIBS = $(wildcard lpcDir/*)
+LPC_DIR = lpcDir
+MY_LIBS = $(wildcard $(LPC_DIR)/*)
 HEADERS = lpcDir/List.hpp lpcDir/Queue.hpp lpcDir/Stack.hpp
 NO_HEADERS = lpcDir/List.cpp lpcDir/Queue.cpp lpcDir/Stack.cpp
-OBJECTS = $(patsubst lpcDir/%.cpp, object/%.o, $(NO_HEADERS))
+OBJECTS = $(patsubst $(LPC_DIR)/%.cpp, object/%.o, $(NO_HEADERS))
 TARGET = main.cpp
 OUTPUT = lpc
 
@@ -15,9 +16,6 @@ $(OUTPUT): $(TARGET) $(HEADERS) $(OBJECTS)
 # 	g++ $(CFLAGS) -o $(OUTPUT) $(TARGET)
 
 run: generic_types $(OUTPUT)
-	./$(OUTPUT)
-
-run_txt: generic_types $(OUTPUT)
 	./$(OUTPUT) < input.txt
 
 object/%.o: lpcDir/%.cpp
@@ -32,14 +30,11 @@ generic_types:
 find_error: $(OUTPUT)
 	@gdb -x find_error ./$(OUTPUT)
 
-personalized: $(OUTPUT)
-	@gdb -x personalized ./$(OUTPUT)
-
 ready: clean
-	rm -fi find_error personalized tests.py
+	rm -fi find_error debug.cpp generic_types.py
 	echo "recuerda colocar -O3 y -s"
 
-tests: $(OUTPUT)
-	python tests.py
+remember:
+	cat notas.txt
 
 .PHONY: clean run find_error personalized generic_types

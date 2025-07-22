@@ -169,13 +169,12 @@ void List<T>::reverse()   {
         current = current->getPrev();
     }
 
-    // Swap head and tail
     temp = head;
     head = tail;
     tail = temp;
 
-    lastUsed = NULL; // reset lastUsed since we modified the list
-    lastUsedPosition = 0; // reset lastUsedPosition since we modified the list
+    lastUsed = NULL;
+    lastUsedPosition = 0;
 }
 
 template <typename T>
@@ -459,9 +458,13 @@ namespace ListUtils {
         return lists;
     }
 }
-template class List<int>;
-template std::ostream& operator<<(std::ostream&, const List<int>& list);
+
+
 
 template class List<std::string>;
 template std::ostream& operator<<(std::ostream&, const List<std::string>& list);
+
+
+template class List<int>;
+template std::ostream& operator<<(std::ostream&, const List<int>& list);
 

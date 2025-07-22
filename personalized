@@ -1,6 +1,0 @@
-set print pretty on
-set args < input.txt
-b 43
-run
-info locals
-info args
