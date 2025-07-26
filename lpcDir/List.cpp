@@ -458,13 +458,3 @@ namespace ListUtils {
         return lists;
     }
 }
-
-
-
-template class List<std::string>;
-template std::ostream& operator<<(std::ostream&, const List<std::string>& list);
-
-
-template class List<int>;
-template std::ostream& operator<<(std::ostream&, const List<int>& list);
-

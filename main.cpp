@@ -5,11 +5,11 @@
 
 using namespace std;
 
-void readInput() {
+void leerEntrada() {
 
 }
 
-void processInput() {
+void procesarEntrada() {
 
 }
 
@@ -18,15 +18,17 @@ int main() {
     int casosPrueba;
     cin >> casosPrueba;
 
-/* Espacio para debuggear valores de entrada
-    
-   
+/* Espacio para debuggear valores de entrada (primero establece la entrada en input.txt)
+    IMPORTANTE : no procesar los datos sin saber si se leyo la entrada correctamente
+    leerEntrada();
+    debug(input1, input2, ...);
 */
 
     // espacio para solucion de parcial
     // for (int i = 0; i < casosPrueba; i++) {
-    //     readInput();
-    //     processInput();
+    //     leerEntrada();
+    //     procesarEntrada();
+    //     mostrarResultado();
     // }
 
     return 0;

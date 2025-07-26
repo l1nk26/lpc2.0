@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -std=c++11 -g -O0
+CFLAGS = -Wall -Wextra -s -O3
 
 LPC_DIR = lpcDir
 MY_LIBS = $(wildcard $(LPC_DIR)/*)
@@ -15,17 +15,17 @@ $(OUTPUT): $(TARGET) $(HEADERS) $(OBJECTS)
 # $(OUTPUT): $(TARGET) $(MY_LIBS) 
 # 	g++ $(CFLAGS) -o $(OUTPUT) $(TARGET)
 
-run: generic_types $(OUTPUT)
-	./$(OUTPUT) < input.txt
-
 object/%.o: lpcDir/%.cpp
 	g++ $(CFLAGS) -o $@ -c $<
+
+run: generic_types $(OUTPUT)
+	./$(OUTPUT) < input.txt
 
 clean:
 	rm -f ./$(OUTPUT) object/*
 
 generic_types:
-	python generic_types.py
+	@python generic_types.py
 
 find_error: $(OUTPUT)
 	@gdb -x find_error ./$(OUTPUT)
@@ -37,4 +37,4 @@ ready: clean
 remember:
 	cat notas.txt
 
-.PHONY: clean run find_error personalized generic_types
+.PHONY: clean run find_error generic_types
