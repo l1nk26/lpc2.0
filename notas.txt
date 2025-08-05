@@ -9,3 +9,7 @@ cin.peek()
 cin.ignore(numIgnorados, delimiter)
 getline(cin, buffer, delimiter)
 cin.getline(bugger, size)
+
+
+si quieres usar listUtils agrega esta linea al List.cpp reemplazando T por el tipo deseado
+template void ListUtils::readVertical(List<List<T> > lists);

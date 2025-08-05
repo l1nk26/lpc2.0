@@ -431,30 +431,27 @@ int List<int>::min() {
     return m;
 }
 
-namespace ListUtils {
-  
-    template <typename T>
-    bool readLine(List<List<T> >& lists) {
-        T data;
-        int i = 0;
-        char c;
-        while ((c = std::cin.peek()) != '\n' && c != std::cin.eof()) {
-            std::cin >> data;
-            lists[i].insertEnd(data);
-            i++;
-        }
-        std::cin.get();
-
-        return !std::cin.eof();
-    }
-
-    template <typename T>
-    List<List<T> > readVerticalLists(int n) {
-        List<List<T> > lists;
-        for (int i = 0; i < n; i++) {
+template <typename T>
+void ListUtils::readVertical(List<List<T> >& lists) {
+    T value;
+    int i = 0;
+    while (std::cin >> value) {
+        if (i >= lists.getSize()) {
             lists.insertEnd(List<T>());
         }
-        while (readLine(lists));
-        return lists;
+        lists[i].insertEnd(value);
+        ++i;
+        while (std::cin.peek() == ' ') {
+            std::cin.ignore();
+        }
+        if (std::cin.peek() == '\n') {
+            i = 0;
+            std::cin.ignore();
+        }
     }
 }
+
+
+
+template class List<int>;
+template std::ostream& operator<<(std::ostream&, const List<int>& list);

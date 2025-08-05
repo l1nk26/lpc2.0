@@ -1,6 +1,7 @@
-CFLAGS = -Wall -Wextra -s -O3
 
 LPC_DIR = lpcDir
+CFLAGS = -Wall -Wextra -g -O0 -I$(LPC_DIR)
+
 MY_LIBS = $(wildcard $(LPC_DIR)/*)
 HEADERS = lpcDir/List.hpp lpcDir/Queue.hpp lpcDir/Stack.hpp
 NO_HEADERS = lpcDir/List.cpp lpcDir/Queue.cpp lpcDir/Stack.cpp
@@ -33,6 +34,7 @@ find_error: $(OUTPUT)
 ready: clean
 	rm -fi find_error debug.cpp generic_types.py
 	echo "recuerda colocar -O3 y -s"
+	echo "borra las cosas innecesarias del makefile por favor"
 
 remember:
 	cat notas.txt

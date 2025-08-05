@@ -44,10 +44,12 @@ def getTemplateTypesOf(className: str, fileName: str = "main.cpp") -> list[str]:
             
     return types
 
+
 def writeTemplatesDeclarations(className: str, types: list[str]) -> None:
 
     fileName = f"lpcDir/{className}.cpp"
     for type in types:
+
         if type == "string":
             type = "std::string"
         line = f"template class {className}<{type}>;"
@@ -57,7 +59,8 @@ def writeTemplatesDeclarations(className: str, types: list[str]) -> None:
 
         with open(fileName, "a") as f:
             f.write("\n" + line + "\n")
-            f.write(lineOverload + "\n\n")
+            f.write(lineOverload + "\n")
+
 
 
 def handAnidateTemplates(types: list[str]) -> list[str]:
