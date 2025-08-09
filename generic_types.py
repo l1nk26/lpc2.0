@@ -50,8 +50,9 @@ def writeTemplatesDeclarations(className: str, types: list[str]) -> None:
     fileName = f"lpcDir/{className}.cpp"
     for type in types:
 
-        if type == "string":
-            type = "std::string"
+        if type.count("string") > 0 and type.count("std::") == 0:
+            type.replace("string", "std::string")
+            
         line = f"template class {className}<{type}>;"
         lineOverload = f"template std::ostream& operator<<(std::ostream&, const {className}<{type}>& {className.lower()});"
         if isInFile(line, fileName):

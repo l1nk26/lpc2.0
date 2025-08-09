@@ -5,12 +5,27 @@
 
 using namespace std;
 
-void leerEntrada() {
-
+void readKValues(List<int>& kValues, int n) {
+    int value;
+    for (int i = 0; i < n; i++) {
+        cin >> value;
+        kValues.insertEnd(value);
+    }
 }
 
-void procesarEntrada() {
-
+void readVerticalLists(List<List<string> >& people) {
+    int column = 0;
+    string value;
+    while (cin >> value) {
+        if (people.getSize() <= column) {
+            people.insertEnd(List<string>());
+        }
+        people[column].insertEnd(value);
+        ++column;
+        if (cin.peek() == '\n') {
+            column = 0;
+        }
+    }
 }
 
 int main() {
@@ -18,9 +33,6 @@ int main() {
     int casosPrueba;
     cin >> casosPrueba;
 
-    List<int> lista;
-    lista.insertEnd(5);
-    lista.insertEnd(3);
 
 /* Espacio para debuggear valores de entrada (primero establece la entrada en input.txt)
     IMPORTANTE : no procesar los datos sin saber si se leyo la entrada correctamente
@@ -32,11 +44,11 @@ int main() {
 */
 
     // espacio para solucion de parcial
-    // for (int i = 0; i < casosPrueba; i++) {
-    //     leerEntrada();
-    //     procesarEntrada();
-    //     mostrarResultado();
-    // }
+    //leerEntrada();
+    for (int i = 0; i < casosPrueba; i++) {
+        //procesarEntrada();
+        //mostrarResultado();
+    }
 
     return 0;
 }

@@ -1,6 +1,6 @@
 
 LPC_DIR = lpcDir
-CFLAGS = -Wall -Wextra -g -O0 -I$(LPC_DIR)
+CFLAGS = -Wall -Wextra -Werror -g -O0 -I$(LPC_DIR)
 
 MY_LIBS = $(wildcard $(LPC_DIR)/*)
 HEADERS = lpcDir/List.hpp lpcDir/Queue.hpp lpcDir/Stack.hpp
@@ -11,10 +11,6 @@ OUTPUT = lpc
 
 $(OUTPUT): $(TARGET) $(HEADERS) $(OBJECTS)
 	g++ $(CFLAGS) -o $(OUTPUT) $(TARGET) $(OBJECTS)
-
-# antigua regla de compilacion
-# $(OUTPUT): $(TARGET) $(MY_LIBS) 
-# 	g++ $(CFLAGS) -o $(OUTPUT) $(TARGET)
 
 object/%.o: lpcDir/%.cpp
 	g++ $(CFLAGS) -o $@ -c $<
