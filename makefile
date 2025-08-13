@@ -3,36 +3,29 @@ LPC_DIR = lpcDir
 CFLAGS = -Wall -Wextra -Werror -g -O0 -I$(LPC_DIR)
 
 MY_LIBS = $(wildcard $(LPC_DIR)/*)
-HEADERS = lpcDir/List.hpp lpcDir/Queue.hpp lpcDir/Stack.hpp
-NO_HEADERS = lpcDir/List.cpp lpcDir/Queue.cpp lpcDir/Stack.cpp
-OBJECTS = $(patsubst $(LPC_DIR)/%.cpp, object/%.o, $(NO_HEADERS))
 TARGET = main.cpp
 OUTPUT = lpc
 
-$(OUTPUT): $(TARGET) $(HEADERS) $(OBJECTS)
-	g++ $(CFLAGS) -o $(OUTPUT) $(TARGET) $(OBJECTS)
+all: $(OUTPUT)
 
-object/%.o: lpcDir/%.cpp
-	g++ $(CFLAGS) -o $@ -c $<
+$(OUTPUT): $(TARGET) $(MY_LIBS)
+	g++ $(CFLAGS) -o $(OUTPUT) $(TARGET) 
 
-run: generic_types $(OUTPUT)
+run: $(OUTPUT)
 	./$(OUTPUT) < input.txt
 
 clean:
-	rm -f ./$(OUTPUT) object/*
-
-generic_types:
-	@python generic_types.py
+	rm -f ./$(OUTPUT) 
 
 find_error: $(OUTPUT)
 	@gdb -x find_error ./$(OUTPUT)
 
 ready: clean
-	rm -fi find_error debug.cpp generic_types.py
-	echo "recuerda colocar -O3 y -s"
+	rm -fi find_error debug.cpp 
+	echo "recuerda colocar -O3"
 	echo "borra las cosas innecesarias del makefile por favor"
 
 remember:
 	cat notas.txt
 
-.PHONY: clean run find_error generic_types
+.PHONY: clean run find_error 

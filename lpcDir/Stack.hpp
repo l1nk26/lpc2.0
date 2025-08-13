@@ -36,6 +36,6 @@ class Stack {
         int size;
 };
 
-//#include "Stack.cpp"
+#include "Stack.cpp"
 
 #endif

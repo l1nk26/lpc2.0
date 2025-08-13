@@ -74,12 +74,6 @@ class List {
         void removeNode(DoubleLinkNode<T>* node);
 };
 
-namespace ListUtils {
-    template <typename T>
-    void readVertical(List<List<T> >& lists);
-}
-
-
-//#include "List.cpp"
+#include "List.cpp"
 
 #endif

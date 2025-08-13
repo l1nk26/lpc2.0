@@ -13,14 +13,14 @@ void readKValues(List<int>& kValues, int n) {
     }
 }
 
-void readVerticalLists(List<List<string> >& people) {
+void readVerticalLists(List<List<string> >& data) {
     int column = 0;
     string value;
     while (cin >> value) {
-        if (people.getSize() <= column) {
-            people.insertEnd(List<string>());
+        if (data.getSize() <= column) {
+            data.insertEnd(List<string>());
         }
-        people[column].insertEnd(value);
+        data[column].insertEnd(value);
         ++column;
         if (cin.peek() == '\n') {
             column = 0;
@@ -32,7 +32,6 @@ int main() {
 
     int casosPrueba;
     cin >> casosPrueba;
-
 
 /* Espacio para debuggear valores de entrada (primero establece la entrada en input.txt)
     IMPORTANTE : no procesar los datos sin saber si se leyo la entrada correctamente
